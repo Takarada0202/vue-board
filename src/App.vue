@@ -1,6 +1,7 @@
 <template>
   <div>
       <custom-hearder />
+
       <router-view></router-view>
   </div>
 </template>
@@ -10,6 +11,7 @@ import CustomHearder from './components/CustomHeader.vue'
 export default {
   components : {
     CustomHearder, 
+
   }
 }
 </script>
