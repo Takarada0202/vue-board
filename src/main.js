@@ -1,16 +1,17 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import Home from './page/homePage.vue'
+import Home from './page/HomePage.vue'
 import axios from 'axios'
 import { createRouter, createWebHistory } from 'vue-router'
 import Board from './page/BoardListPage.vue';
-
+import Detail from './page/DetailPage.vue'
 
 
 
 const routes = [
     { name: 'home', path: '/', component: Home },
     { name: 'board', path: '/:id', component: Board },
+    { name: 'detail', path: '/:id/:pageId', component: Detail },
 ]
 
 

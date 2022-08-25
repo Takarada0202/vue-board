@@ -5,15 +5,26 @@
         </div>
     </div>
     <div v-if="type == 1 ">
-            <input type="radio" value="null"  name="compl" v-model="completed" > 
-            <input type="radio" value="true" name="compl" v-model="completed" >
-            <input type="radio" value="false" name="compl" v-model="completed">
+        <button @click="statusNull()" id="statusNullBtn"  value="null">모두</button>
+        <button @click="statusTrue()" id="statusTrueBtn"  value="true">작성완료</button>
+        <button @click="statusFalse()" id="statusFalseBtn" value="false">작성중</button>
         <ul v-for="(board,idx) in data" :key="idx">
-            <li v-if="board.userId==this.propsUserId && this.completed == null">{{board.title}}</li>
-            <li v-else-if="board.userId==this.propsUserId && board.completed ==this.completed">{{board.title}}</li>
+            <li v-if="board.userId==this.propsUserId && this.completed == null">
+                <router-link :to="{name : 'detail', params: {pageId : board.id, userId :board.userId }}">{{board.title}}</router-link>
+            </li>
+            <li v-else-if="board.userId==this.propsUserId && board.completed ==this.completed">
+                <router-link :to="{name : 'detail', params: {pageId : board.id, userId : board.userId}}">{{board.title}}</router-link>
+            </li>
         </ul>
     </div>
-
+    <div v-if="type == 2">
+        <h3>{{data[this.propsPageId-1].title}}</h3>
+        <h4>{{data[this.propsPageId-1].id}}</h4>
+        <div>
+            <input type="button" @click="prefix()" value="prefix">
+            <input type="button" @click="unit()" value="unit">
+        </div>
+    </div>
 </template>
 
 <script>
@@ -24,12 +35,13 @@ export default {
             data : this.$userItem,
             userList : _.uniqBy((this.$userItem),'userId'),
             userBoardList : [],
-            completed : true,
+            completed : null, 
         }
     },
     props :{
         type : Number,
         propsUserId : Number,
+        propsPageId : Number,
     },
     mounted() { 
             // return this.data.filter(
@@ -44,6 +56,26 @@ export default {
             // })
             
         },
+    methods :{
+        statusNull() {
+            this.completed = document.querySelector('#statusNullBtn').value
+            console.log(this.completed);
+        },
+        statusTrue() {
+            this.completed = document.querySelector('#statusTrueBtn').value
+            console.log(this.completed);
+        },
+        statusFalse() {
+            this.completed = document.querySelector('#statusFalseBtn').value
+            console.log(this.completed);
+        },
+        prefix() {
+
+        },
+        unit() {
+
+        }
+    }
 
 
     }
