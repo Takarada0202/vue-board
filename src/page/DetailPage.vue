@@ -1,7 +1,7 @@
 <template>
   <div>
 
-        <user-item :type="2"  :propsUserId="this.userId" :propsCompleted="this.userBoardList" :propsPageId="this.pageId"/>
+        <user-item :type="2"  :propsUserId="userId" :propsCompleted="userBoardList" :propsPageId="pageId"/>
   </div>
 </template>
 

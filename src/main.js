@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import Home from './page/HomePage.vue'
 import axios from 'axios'
+
 import { createRouter, createWebHistory } from 'vue-router'
 import Board from './page/BoardListPage.vue';
 import Detail from './page/DetailPage.vue'
