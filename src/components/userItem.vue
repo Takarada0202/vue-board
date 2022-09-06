@@ -18,9 +18,9 @@
             </h1>
         </div>
         <div v-else>
-            <button @click="statusNull()" id="statusNullBtn"  value="null">모두</button>
-            <button @click="statusTrue()" id="statusTrueBtn"  value="true">작성완료</button>
-            <button @click="statusFalse()" id="statusFalseBtn" value="false">작성중</button>
+            <button @click="updateComplatedStatus(null)" >모두</button>
+            <button @click="updateComplatedStatus(true)" >작성완료</button>
+            <button @click="updateComplatedStatus(false)">작성중</button>
             <ul v-for="(board,idx) in data" :key="idx">
                 <li v-if="board.userId==this.propsUserId && this.completed == null">
                     <router-link :to="{name : 'detail', params: {pageId : board.id, userId :board.userId }}">{{board.title}}</router-link>
@@ -37,7 +37,6 @@
         <div>
             <input type="button" @click="prefix()" value="prefix">
             <input type="button" @click="unit()" value="unit">
-            <router-link to="/">dd</router-link>
         </div>
     </div>
 </template>
@@ -53,7 +52,6 @@ export default {
             completed : null, 
             nextPage : Number(this.propsPageId)+1,
             prevPage : Number(this.propsPageId)-1,
-            maxPage : this.userDetailId * 20,
             userDetailId : Number(this.$route.params.id),
         }
     },
@@ -77,26 +75,8 @@ export default {
 
         },
     methods :{
-        statusNull() {
-            this.completed = document.querySelector('#statusNullBtn').value
-            setTimeout(() => {
-                    this.$router.go()
-                }, 1);
-            console.log(this.completed);
-        },
-        statusTrue() {
-            this.completed = document.querySelector('#statusTrueBtn').value
-            setTimeout(() => {
-                    this.$router.go()
-                }, 1);
-            console.log(this.completed);
-        },
-        statusFalse() {
-            this.completed = document.querySelector('#statusFalseBtn').value
-            setTimeout(() => {
-                    this.$router.go()
-                }, 1);
-            console.log(this.completed);
+        updateComplatedStatus(status) {
+            this.completed = status
         },
         prefix() {
             if (this.userDetailId != this.data[this.propsPageId].userId) {
